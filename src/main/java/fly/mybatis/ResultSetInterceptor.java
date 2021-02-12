@@ -26,7 +26,15 @@ import java.util.List;
 })
 public class ResultSetInterceptor implements Interceptor {
     private static final Field MAPPED_STATEMENT_FIELD;
-    private final Configuration configuration;
+
+    private Configuration configuration;
+
+    public void setConfiguration(Configuration configuration) {
+        this.configuration = configuration;
+    }
+
+    public ResultSetInterceptor() {
+    }
 
     public ResultSetInterceptor(Configuration configuration) {
         this.configuration = configuration;
