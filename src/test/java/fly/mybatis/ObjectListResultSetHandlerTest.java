@@ -39,7 +39,7 @@ class ObjectListResultSetHandlerTest {
                 .build();
         configuration.setEnvironment(environment);
         configuration.getMapperRegistry().addMappers("fly.mybatis.mapper");
-        configuration.addInterceptor(new ResultSetIntercept(configuration));
+        configuration.addInterceptor(new ResultSetInterceptor(configuration));
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder()
                 .build(configuration);
         userMapper = configuration.getMapper(TUserMapper.class, sqlSessionFactory.openSession());

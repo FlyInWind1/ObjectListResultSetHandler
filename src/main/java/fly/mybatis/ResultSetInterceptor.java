@@ -24,11 +24,11 @@ import java.util.List;
         @Signature(type = ResultSetHandler.class, method = "handleResultSets", args = Statement.class),
         @Signature(type = ResultSetHandler.class, method = "handleCursorResultSets", args = Statement.class)
 })
-public class ResultSetIntercept implements Interceptor {
+public class ResultSetInterceptor implements Interceptor {
     private static final Field MAPPED_STATEMENT_FIELD;
     private final Configuration configuration;
 
-    public ResultSetIntercept(Configuration configuration) {
+    public ResultSetInterceptor(Configuration configuration) {
         this.configuration = configuration;
     }
 
@@ -48,7 +48,7 @@ public class ResultSetIntercept implements Interceptor {
         Object target = invocation.getTarget();
         if (target instanceof DefaultResultSetHandler) {
             DefaultResultSetHandler handler = (DefaultResultSetHandler) target;
-            MappedStatement mappedStatement = (MappedStatement) ResultSetIntercept.MAPPED_STATEMENT_FIELD.get(handler);
+            MappedStatement mappedStatement = (MappedStatement) ResultSetInterceptor.MAPPED_STATEMENT_FIELD.get(handler);
             List<ResultMap> resultMaps = mappedStatement.getResultMaps();
             if (resultMaps.size() == 1 && resultMaps.get(0).getType() == List.class) {
                 ObjectListResultSetHandler objectListResultSetHandler = new ObjectListResultSetHandler(configuration);
